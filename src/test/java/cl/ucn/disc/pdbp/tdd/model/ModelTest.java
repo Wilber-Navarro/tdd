@@ -1,5 +1,6 @@
 package cl.ucn.disc.pdbp.tdd.model;
 
+import cl.ucn.disc.pdbp.utils.Validation;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -67,7 +68,7 @@ public final class ModelTest {
      * Test the digito verificador.
      */
     @Test
-    @Disabled // remove to run
+    //@Disabled // remove to run
     public void testDigitoVerificador() {
 
         Assertions.assertFalse(Validation.isRutValid(null));
