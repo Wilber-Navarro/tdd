@@ -66,7 +66,11 @@ public final class Validation {
     }
     private static final String REGEX = "^(([(]?(\\d{2,4})[)]?)|(\\d{2,4})|([+1-9]+\\d{1,2}))?[-\\s]?(\\d{2,3})?[-\\s]?((\\d{7,8})|(\\d{3,4}[-\\s]\\d{3,4}))$";
     private static final String DIR = "^[A-z]+(\\s[A-z]+)*\\s\\d+";
-    private static final String EMA = "^[-\\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\\.){1,125}[A-Z]{2,63}$";
+    private static final String EMA = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";//"^[-\\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\\.){1,125}[A-Z]{2,63}$";
+
+
+
+
     /**
      * The regular expression compiled.
      */
@@ -106,7 +110,7 @@ public final class Validation {
         if(email==null){
             return false;
         }
-        return PATTERN2.matcher(email).find();
+        return PATTERN3.matcher(email).find();
     }
 
     /**

@@ -26,6 +26,7 @@ public final class ModelTest {
      * - El rut debe ser valido.
      */
     @Test
+    //@Disabled
     public void testPersona() {
 
         log.debug("Testing Persona ..");
@@ -37,6 +38,10 @@ public final class ModelTest {
         String nombreApellido = nombre + " " + apellido;
         String rutOk = "152532873";
         String rutError = "15253287K";
+        String fijo = "345 6789";
+        String movil = "(345) 67891234";
+        String direccion = "Rupanco 9999";
+        String email = "correo@gmail.com";
 
         // Test constructor and getters
         Persona persona = new Persona(nombre, apellido, rutOk);
@@ -83,6 +88,57 @@ public final class ModelTest {
         Assertions.assertFalse(Validation.isRutValid("15253287K"));
         Assertions.assertFalse(Validation.isRutValid("15253287-"));
 
+    }
+
+    /**
+     * Test the phone number.
+     */
+    @Test
+    public void testPhoneNumber() {
+
+        Assertions.assertFalse(Validation.isPhoneValid(null));
+
+        Assertions.assertTrue(Validation.isPhoneValid("543 6785"));
+        Assertions.assertTrue(Validation.isPhoneValid("(569) 56756689"));
+
+        Assertions.assertFalse(Validation.isPhoneValid("NUMERO"));
+        Assertions.assertFalse(Validation.isPhoneValid("1232sadsad12"));
+        Assertions.assertFalse(Validation.isPhoneValid("1234$%%^^"));
+
+    }
+    /**
+     * Test the address.
+     */
+    @Test
+    public void testAddress() {
+
+        Assertions.assertFalse(Validation.isDireccionValid(null));
+
+        Assertions.assertTrue(Validation.isDireccionValid("Pucon 3345"));
+        Assertions.assertTrue(Validation.isDireccionValid("Avenida Argentina 4567"));
+
+        Assertions.assertFalse(Validation.isDireccionValid("NUMERO"));
+        Assertions.assertFalse(Validation.isDireccionValid("1232sadsad12"));
+        Assertions.assertFalse(Validation.isDireccionValid("1234$%%^^"));
+        Assertions.assertFalse(Validation.isDireccionValid("Avenida Argentina"));
+        Assertions.assertFalse(Validation.isDireccionValid("1234"));
+
+    }
+    /**
+     * Test the email.
+     */
+    @Test
+    public void testEmail() {
+
+        Assertions.assertFalse(Validation.isEmailValid(null));
+
+        Assertions.assertTrue(Validation.isEmailValid("Correo@alumnos.ucn.cl"));
+        Assertions.assertTrue(Validation.isEmailValid("correo001@alumnos.ucn.cl"));
+
+        Assertions.assertFalse(Validation.isEmailValid("Correo"));
+        Assertions.assertFalse(Validation.isEmailValid("12345"));
+        Assertions.assertFalse(Validation.isEmailValid("correo@qwer@gmail.com"));
+        Assertions.assertFalse(Validation.isEmailValid("correo @ Gmail"));
     }
 
 }
