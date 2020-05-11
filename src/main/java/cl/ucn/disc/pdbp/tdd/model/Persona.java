@@ -1,7 +1,10 @@
 package cl.ucn.disc.pdbp.tdd.model;
 
 import cl.ucn.disc.pdbp.utils.Validation;
-
+/**
+ * Persona Class
+ * @autor Wilber Navarro
+ */
 public class Persona {
     private String nombre;
     private String apellido;
@@ -11,6 +14,16 @@ public class Persona {
     private String direccion;
     private String email;
 
+    /**
+     * Constructor
+     * @param nombre
+     * @param apellido
+     * @param rut
+     * @param fijo
+     * @param movil
+     * @param direccion
+     * @param email
+     */
     public Persona(String nombre, String apellido, String rut, String fijo, String movil, String direccion, String email) {
         if (nombre == null || apellido == null || rut == null) {
             throw new NullPointerException("Nombre, apellido and rut cannot be null");
@@ -44,6 +57,13 @@ public class Persona {
         }
         this.email = email;
     }
+
+    /**
+     * Constructor
+     * @param nombre
+     * @param apellido
+     * @param rut
+     */
     public Persona(String nombre, String apellido, String rut) {
         if (nombre == null || apellido == null || rut == null) {
             throw new NullPointerException("Nombre, apellido and rut cannot be null");
@@ -63,18 +83,31 @@ public class Persona {
 
     }
 
+    /**
+     *
+     * @return nombre
+     */
     public String getNombre() {
         return nombre;
     }
-
+    /**
+     *
+     * @return apellido
+     */
     public String getApellido() {
         return apellido;
     }
-
+    /**
+     *
+     * @return rut
+     */
     public String getRut() {
         return rut;
     }
-
+    /**
+     *
+     * @return Nombre Apellido
+     */
     public String getNombreApellido() {
         return nombre+" "+apellido;
     }

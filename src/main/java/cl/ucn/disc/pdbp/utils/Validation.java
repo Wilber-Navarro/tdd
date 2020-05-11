@@ -1,9 +1,14 @@
 package cl.ucn.disc.pdbp.utils;
 import java.util.regex.Pattern;
 
-@SuppressWarnings({"UtilityClass", "UtilityClassCanBeEnum"})
+/**
+ * Validation Class
+ * @autor Wilber Navarro
+ */
 public final class Validation {
-
+    /**
+     *
+     */
     private Validation() {
     }
 /**
@@ -64,8 +69,20 @@ public final class Validation {
         }
         return false;
     }
+
+    /**
+     * the regular expression
+     * -https://stackoverrun.com/es/q/543170
+     */
     private static final String REGEX = "^(([(]?(\\d{2,4})[)]?)|(\\d{2,4})|([+1-9]+\\d{1,2}))?[-\\s]?(\\d{2,3})?[-\\s]?((\\d{7,8})|(\\d{3,4}[-\\s]\\d{3,4}))$";
+    /**
+     * the regular expression     *
+     */
     private static final String DIR = "^[A-z]+(\\s[A-z]+)*\\s\\d+";
+    /**
+     * the regular expression
+     * - https://howtodoinjava.com/regex/java-regex-validate-email-address/
+     */
     private static final String EMA = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";//"^[-\\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\\.){1,125}[A-Z]{2,63}$";
 
 
@@ -75,7 +92,13 @@ public final class Validation {
      * The regular expression compiled.
      */
     private static final Pattern PATTERN = Pattern.compile(REGEX);
+    /**
+     * The regular expression compiled.
+     */
     private static final Pattern PATTERN2 = Pattern.compile(DIR);
+    /**
+     * The regular expression compiled.
+     */
     private static final Pattern PATTERN3 = Pattern.compile(EMA);
     /*
      *
@@ -92,6 +115,11 @@ public final class Validation {
         return dv == (char) (s != 0 ? s + 47 : 75);
     }
 
+    /**
+     *
+     * @param numero
+     * @return true if number is valid
+     */
     public static boolean isPhoneValid(String numero) {
         if(numero==null){
             return false;
@@ -99,6 +127,11 @@ public final class Validation {
         return PATTERN.matcher(numero).find();
     }
 
+    /**
+     *
+     * @param direccion
+     * @return true if direccion is valid
+     */
     public static boolean isDireccionValid(String direccion) {
         if(direccion==null){
             return false;
@@ -106,6 +139,11 @@ public final class Validation {
         return PATTERN2.matcher(direccion).find();
     }
 
+    /**
+     *
+     * @param email
+     * @return true if email is valid
+     */
     public static boolean isEmailValid(String email) {
         if(email==null){
             return false;
