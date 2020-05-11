@@ -65,10 +65,14 @@ public final class Validation {
         return false;
     }
     private static final String REGEX = "^(([(]?(\\d{2,4})[)]?)|(\\d{2,4})|([+1-9]+\\d{1,2}))?[-\\s]?(\\d{2,3})?[-\\s]?((\\d{7,8})|(\\d{3,4}[-\\s]\\d{3,4}))$";
+    private static final String DIR = "^[A-z]+(\\s[A-z]+)*\\s\\d+";
+    private static final String EMA = "^[-\\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\\.){1,125}[A-Z]{2,63}$";
     /**
      * The regular expression compiled.
      */
     private static final Pattern PATTERN = Pattern.compile(REGEX);
+    private static final Pattern PATTERN2 = Pattern.compile(DIR);
+    private static final Pattern PATTERN3 = Pattern.compile(EMA);
     /*
      *
      * Fuente : http://www.creations.cl/2009/01/generador-de-rut-y-validador/
@@ -91,12 +95,18 @@ public final class Validation {
         return PATTERN.matcher(numero).find();
     }
 
-    public static boolean isDireccionValid(String movil) {
-        return false;
+    public static boolean isDireccionValid(String direccion) {
+        if(direccion==null){
+            return false;
+        }
+        return PATTERN2.matcher(direccion).find();
     }
 
-    public static boolean isEmailValid(String movil) {
-        return false;
+    public static boolean isEmailValid(String email) {
+        if(email==null){
+            return false;
+        }
+        return PATTERN2.matcher(email).find();
     }
 
     /**
