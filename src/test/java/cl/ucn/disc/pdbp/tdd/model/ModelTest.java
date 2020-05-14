@@ -1,3 +1,27 @@
+/*
+ * MIT License
+ *
+ * Copyright (c) [2020.] [Wilber Mauricio Navarro Moreira]
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 package cl.ucn.disc.pdbp.tdd.model;
 
 import cl.ucn.disc.pdbp.utils.Validation;
@@ -13,7 +37,7 @@ import org.slf4j.LoggerFactory;
 public final class ModelTest {
 
     /**
-     * The Logger (console)
+     * The Logger (console).
      */
     private static final Logger log = LoggerFactory.getLogger(ModelTest.class);
 
@@ -44,24 +68,29 @@ public final class ModelTest {
         String email = "correo@gmail.com";
 
         // Test constructor and getters
-        Persona persona = new Persona(nombre, apellido, rutOk);
+        Persona persona = new Persona(nombre, apellido, rutOk,fijo,movil,direccion,email);
         Assertions.assertEquals(persona.getNombre(), nombre);
         Assertions.assertEquals(persona.getApellido(), apellido);
         Assertions.assertEquals(persona.getNombreApellido(), nombreApellido);
 
         // Testing nullity
         log.debug(".. nullity ..");
-        Assertions.assertThrows(NullPointerException.class, () -> new Persona(null, null, null));
-        Assertions.assertThrows(NullPointerException.class, () -> new Persona(null, null, rutOk));
-        Assertions.assertThrows(NullPointerException.class, () -> new Persona(null, apellido, null));
-        Assertions.assertThrows(NullPointerException.class, () -> new Persona(null, apellido, rutOk));
-        Assertions.assertThrows(NullPointerException.class, () -> new Persona(nombre, null, null));
-        Assertions.assertThrows(NullPointerException.class, () -> new Persona(nombre, null, rutOk));
-        Assertions.assertThrows(NullPointerException.class, () -> new Persona(nombre, apellido, null));
+        Assertions.assertThrows(NullPointerException.class, () -> new Persona(null, null, null,null,null,null,null));
+        Assertions.assertThrows(NullPointerException.class, () -> new Persona(null, null, null,null,null,null,email));
+        Assertions.assertThrows(NullPointerException.class, () -> new Persona(null, null, null,null,null,direccion,null));
+        Assertions.assertThrows(NullPointerException.class, () -> new Persona(null, null, null,null,movil,null,null));
+        Assertions.assertThrows(NullPointerException.class, () -> new Persona(null, null, null,fijo,null,null,null));
+        //TODO: Necesario todas las combinaciones??
+        Assertions.assertThrows(NullPointerException.class, () -> new Persona(null, null, rutOk,null,null,null,null));
+        Assertions.assertThrows(NullPointerException.class, () -> new Persona(null, apellido, null,null,null,null,null));
+        Assertions.assertThrows(NullPointerException.class, () -> new Persona(null, apellido, rutOk,null,null,null,null));
+        Assertions.assertThrows(NullPointerException.class, () -> new Persona(nombre, null, null,null,null,null,null));
+        Assertions.assertThrows(NullPointerException.class, () -> new Persona(nombre, null, rutOk,null,null,null,null));
+        Assertions.assertThrows(NullPointerException.class, () -> new Persona(nombre, apellido, null,null,null,null,null));
 
         // Testing invalid rut
         log.debug(".. rut ..");
-        Assertions.assertThrows(RuntimeException.class, () -> new Persona(nombre, apellido, rutError));
+        Assertions.assertThrows(RuntimeException.class, () -> new Persona(nombre, apellido, rutError,fijo,movil,direccion,email));
 
         // TODO: Add the size of nombre y apellido.
 
@@ -140,5 +169,22 @@ public final class ModelTest {
         Assertions.assertFalse(Validation.isEmailValid("correo@qwer@gmail.com"));
         Assertions.assertFalse(Validation.isEmailValid("correo @ Gmail"));
     }
+    /**
+     * Test the repository.
 
+    @Test
+    public void testRepository() {
+
+        String databaseUrl = "jdbc:h2:mem:fivet_db";
+        try(ConnectionSource connectionSource)=new JdbcConnectionSource(databaseUrl)){
+            Repository<Persona,Long> theRepo=new RepositoryOrmLite<>(connectionSource,Persona.class);
+            List<Persona> personas=theRepo.findAll();
+            Assertions.assertEquals(personas.size(),"Size!=o");
+
+        }catch(IOException|SQLException e){
+            throw new RunTimeException(e);
+        }
+
+    }
+    */
 }

@@ -24,20 +24,66 @@
 
 package cl.ucn.disc.pdbp.tdd.model;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 import cl.ucn.disc.pdbp.utils.Validation;
+
 /**
  * Persona Class.
  * @autor Wilber Navarro.
  */
+@DatabaseTable(tableName = "persona")
 public class Persona {
+    /**
+     * The id:Primary key and autoincrement.
+     */
+    @DatabaseField(generatedId = true)
+    private Long id;
+
+    /**
+     * The nombre
+     */
+    @DatabaseField(canBeNull = false)
     private String nombre;
+
+    /**
+     * The apellido
+     */
+    @DatabaseField(canBeNull = false)
     private String apellido;
+
+    /**
+     * The rut
+     */
+    @DatabaseField(canBeNull = false, index = true)
     private String rut;
+
+    /**
+     * The numero fijo
+     */
     private String fijo;
+
+    /**
+     * The numero movil
+     */
     private String movil;
+
+    /**
+     * The direccion
+     */
     private String direccion;
+
+    /**
+     * The email
+     */
     private String email;
 
+    /**
+     * The Constructor.
+     */
+    public Persona(String nombre, String apellido, String rut, String email) {
+        this(rut, nombre, apellido, null, null, null, email);
+    }
     /**
      * Constructor
      * @param nombre de la persona.
@@ -82,6 +128,11 @@ public class Persona {
         this.email = email;
     }
 
+    /**
+     * Empy Constructor
+      */
+    Persona(){
+    }
 
     /**
      *
@@ -115,4 +166,10 @@ public class Persona {
         return nombre+" "+apellido;
     }
 
+    /**
+     * @return id
+     */
+    public Long getId() {
+        return id;
+    }
 }
