@@ -2,8 +2,8 @@ package cl.ucn.disc.pdbp.tdd.model;
 
 import cl.ucn.disc.pdbp.utils.Validation;
 /**
- * Persona Class
- * @autor Wilber Navarro
+ * Persona Class.
+ * @autor Wilber Navarro.
  */
 public class Persona {
     private String nombre;
@@ -16,13 +16,13 @@ public class Persona {
 
     /**
      * Constructor
-     * @param nombre
-     * @param apellido
-     * @param rut
-     * @param fijo
-     * @param movil
-     * @param direccion
-     * @param email
+     * @param nombre de la persona.
+     * @param apellido de la persona.
+     * @param rut de la persona.
+     * @param fijo numero fijo de la persona.
+     * @param movil numero movil de la persona.
+     * @param direccion de la persona.
+     * @param email de la persona.
      */
     public Persona(String nombre, String apellido, String rut, String fijo, String movil, String direccion, String email) {
         if (nombre == null || apellido == null || rut == null) {
@@ -58,57 +58,37 @@ public class Persona {
         this.email = email;
     }
 
-    /**
-     * Constructor
-     * @param nombre
-     * @param apellido
-     * @param rut
-     */
-    public Persona(String nombre, String apellido, String rut) {
-        if (nombre == null || apellido == null || rut == null) {
-            throw new NullPointerException("Nombre, apellido and rut cannot be null");
-        }
-        if (nombre.length() < 2) {
-            throw new RuntimeException("Nombre must be greater than 2 characters");
-        }
-        this.nombre=nombre;
-        if (apellido.length() < 3) {
-            throw new RuntimeException("Apellido must be greater than 3 characters");
-        }
-        this.apellido=apellido;
-        if (!Validation.isRutValid(rut)) {
-            throw new RuntimeException("RUT should be valid");
-        }
-        this.rut=rut;
-
-    }
 
     /**
      *
-     * @return nombre
+     * @return nombre.
      */
     public String getNombre() {
         return nombre;
     }
+
     /**
      *
-     * @return apellido
+     * @return apellido.
      */
     public String getApellido() {
         return apellido;
     }
+
     /**
      *
-     * @return rut
+     * @return rut.
      */
     public String getRut() {
         return rut;
     }
+
     /**
      *
-     * @return Nombre Apellido
+     * @return Nombre Apellido.
      */
     public String getNombreApellido() {
         return nombre+" "+apellido;
     }
+
 }

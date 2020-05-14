@@ -1,4 +1,5 @@
 package cl.ucn.disc.pdbp.tdd.model;
+
 /**
  * Foto Class
  * @autor Wilber Navarro
@@ -21,4 +22,5 @@ public class Foto {
     public String getNombre() {
         return nombre;
     }
+
 }

@@ -2,8 +2,8 @@ package cl.ucn.disc.pdbp.utils;
 import java.util.regex.Pattern;
 
 /**
- * Validation Class
- * @autor Wilber Navarro
+ * Validation Class.
+ * @autor Wilber Navarro.
  */
 public final class Validation {
     /**
@@ -71,35 +71,36 @@ public final class Validation {
     }
 
     /**
-     * the regular expression
-     * -https://stackoverrun.com/es/q/543170
+     * the regular expression.
+     * -https://stackoverrun.com/es/q/543170.
      */
     private static final String REGEX = "^(([(]?(\\d{2,4})[)]?)|(\\d{2,4})|([+1-9]+\\d{1,2}))?[-\\s]?(\\d{2,3})?[-\\s]?((\\d{7,8})|(\\d{3,4}[-\\s]\\d{3,4}))$";
+
     /**
-     * the regular expression     *
+     * the regular expression     *.
      */
     private static final String DIR = "^[A-z]+(\\s[A-z]+)*\\s\\d+";
+
     /**
-     * the regular expression
-     * - https://howtodoinjava.com/regex/java-regex-validate-email-address/
+     * the regular expression.
+     * - https://howtodoinjava.com/regex/java-regex-validate-email-address/.
      */
     private static final String EMA = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";//"^[-\\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\\.){1,125}[A-Z]{2,63}$";
-
-
-
 
     /**
      * The regular expression compiled.
      */
     private static final Pattern PATTERN = Pattern.compile(REGEX);
+
     /**
      * The regular expression compiled.
      */
-    private static final Pattern PATTERN2 = Pattern.compile(DIR);
+    private static final Pattern DIRECCION = Pattern.compile(DIR);
+
     /**
      * The regular expression compiled.
      */
-    private static final Pattern PATTERN3 = Pattern.compile(EMA);
+    private static final Pattern CORREO = Pattern.compile(EMA);
     /*
      *
      * Fuente : http://www.creations.cl/2009/01/generador-de-rut-y-validador/
@@ -117,8 +118,8 @@ public final class Validation {
 
     /**
      *
-     * @param numero
-     * @return true if number is valid
+     * @param numero fijo o movil de la persona.
+     * @return true if number is valid.
      */
     public static boolean isPhoneValid(String numero) {
         if(numero==null){
@@ -129,26 +130,26 @@ public final class Validation {
 
     /**
      *
-     * @param direccion
-     * @return true if direccion is valid
+     * @param direccion .
+     * @return true if direccion is valid.
      */
     public static boolean isDireccionValid(String direccion) {
         if(direccion==null){
             return false;
         }
-        return PATTERN2.matcher(direccion).find();
+        return DIRECCION.matcher(direccion).find();
     }
 
     /**
      *
-     * @param email
-     * @return true if email is valid
+     * @param email .
+     * @return true if email is valid.
      */
     public static boolean isEmailValid(String email) {
         if(email==null){
             return false;
         }
-        return PATTERN3.matcher(email).find();
+        return CORREO.matcher(email).find();
     }
 
     /**
@@ -157,4 +158,5 @@ public final class Validation {
         String expresion = "^[-\\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\\.){1,125}[A-Z]{2,63}$";
     }
     */
+
 }
