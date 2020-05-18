@@ -24,15 +24,77 @@
 
 package cl.ucn.disc.pdbp.tdd.model;
 
+import cl.ucn.disc.pdbp.tdd.dao.ZonedDateTimeType;
+import com.j256.ormlite.field.DatabaseField;
+
+import java.time.ZonedDateTime;
+
+/**
+ * Ficha veterinaria.
+ *
+ * @author Wilber Navarro.
+ */
 public class Ficha {
-    private final int numeroFicha;
-    private final String nombrePaciente;
-    private final String especie;
-    private final String fechaNacimiento;
-    private final String raza;
-    private final Sexo sexo;
-    private final String color;
-    private final Tipo tipo;
+
+    /**
+     * Id.
+     */
+    @DatabaseField(generatedId = true)
+    private Long id;
+
+    /**
+     * Numero de ficha.
+     */
+    @DatabaseField(canBeNull = false, unique = true)
+    private Integer numeroFicha;
+    /**
+     * Nombre del paciente.
+     */
+    @DatabaseField
+    private String nombrePaciente;
+
+    /**
+     * Especie del paciente.
+     */
+    @DatabaseField
+    private String especie;
+
+    /**
+     * Fecha de nacimiento de paciente.
+     */
+    @DatabaseField(persisterClass = ZonedDateTimeType.class)
+    private ZonedDateTime fechaNacimiento;
+
+    /**
+     * Raza del paciente.
+     */
+    @DatabaseField
+    private String raza;
+
+    /**
+     * Sexo del paciente.
+     */
+    @DatabaseField
+    private Sexo sexo;
+
+    /**
+     * color del paciente.
+     */
+    @DatabaseField
+    private String color;
+
+    /**
+     * Tipo.
+     */
+    @DatabaseField
+    private Tipo tipo;
+
+    /**
+     * The duenio.
+     */
+    @DatabaseField(foreign=true, canBeNull = false, foreignAutoRefresh = true)
+    private Persona duenio;
+
 
     /**
      *
@@ -45,7 +107,15 @@ public class Ficha {
      * @param color del paciente.
      * @param tipo del paciente.
      */
-    public Ficha(int numeroFicha, String nombrePaciente, String especie, String fechaNacimiento, String raza, Sexo sexo, String color, Tipo tipo) {
+    public Ficha(Integer numeroFicha,
+                 String nombrePaciente,
+                 String especie,
+                 ZonedDateTime fechaNacimiento,
+                 String raza, Sexo sexo,
+                 String color,
+                 Tipo tipo,
+                 Persona duenio) {
+
         this.numeroFicha = numeroFicha;
         this.nombrePaciente = nombrePaciente;
         this.especie = especie;
@@ -54,13 +124,21 @@ public class Ficha {
         this.sexo = sexo;
         this.color = color;
         this.tipo = tipo;
+        this.duenio=duenio;
+    }
+
+    /**
+     * Empty constructor.
+     */
+    Ficha(){
+       //Nothing
     }
 
     /**
      *
      * @return numeroFicha.
      */
-    public int getNumeroFicha() {
+    public Integer getNumeroFicha() {
         return numeroFicha;
     }
 
@@ -84,7 +162,7 @@ public class Ficha {
      *
      * @return fechaNacimiento.
      */
-    public String getFechaNacimiento() {
+    public ZonedDateTime getFechaNacimiento() {
         return fechaNacimiento;
     }
 
@@ -118,5 +196,21 @@ public class Ficha {
      */
     public Tipo getTipo() {
         return tipo;
+    }
+
+    /**
+     *
+     * @return id.
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     *
+     * @return duenio.
+     */
+    public Persona getDuenio() {
+        return duenio;
     }
 }

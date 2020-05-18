@@ -34,6 +34,7 @@ import cl.ucn.disc.pdbp.utils.Validation;
  */
 @DatabaseTable(tableName = "persona")
 public class Persona {
+
     /**
      * The id:Primary key and autoincrement.
      */
@@ -55,27 +56,31 @@ public class Persona {
     /**
      * The rut
      */
-    @DatabaseField(canBeNull = false, index = true)
+    @DatabaseField(canBeNull = false, index = true,unique = true)
     private String rut;
 
     /**
      * The numero fijo
      */
+    @DatabaseField
     private String fijo;
 
     /**
      * The numero movil
      */
+    @DatabaseField
     private String movil;
 
     /**
      * The direccion
      */
+    @DatabaseField
     private String direccion;
 
     /**
      * The email
      */
+    @DatabaseField(canBeNull = false,unique = true)
     private String email;
 
     /**
