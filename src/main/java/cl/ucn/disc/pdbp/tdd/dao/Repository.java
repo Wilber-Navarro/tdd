@@ -28,8 +28,7 @@ import java.util.List;
 
 /**
  * Generic repository.
- * @param <T>
- * @param <K>
+ * @author Wilber Navarro
  */
 public interface Repository<T,K> {
 

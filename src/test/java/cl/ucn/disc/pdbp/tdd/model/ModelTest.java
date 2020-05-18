@@ -169,22 +169,4 @@ public final class ModelTest {
         Assertions.assertFalse(Validation.isEmailValid("correo@qwer@gmail.com"));
         Assertions.assertFalse(Validation.isEmailValid("correo @ Gmail"));
     }
-    /**
-     * Test the repository.
-
-    @Test
-    public void testRepository() {
-
-        String databaseUrl = "jdbc:h2:mem:fivet_db";
-        try(ConnectionSource connectionSource)=new JdbcConnectionSource(databaseUrl)){
-            Repository<Persona,Long> theRepo=new RepositoryOrmLite<>(connectionSource,Persona.class);
-            List<Persona> personas=theRepo.findAll();
-            Assertions.assertEquals(personas.size(),"Size!=o");
-
-        }catch(IOException|SQLException e){
-            throw new RunTimeException(e);
-        }
-
-    }
-    */
 }
