@@ -37,7 +37,7 @@ import java.time.temporal.TemporalAccessor;
 /**
  * ZonedDateTime to String.
  *
- * @author Diego Urrutia-Astorga.
+ * @author Wilber Navarro.
  */
 @SuppressWarnings({"StaticVariableOfConcreteClass", "Singleton"})
 public final class ZonedDateTimeType extends BaseDataType {
