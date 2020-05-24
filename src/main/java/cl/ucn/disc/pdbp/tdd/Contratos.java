@@ -35,6 +35,7 @@ import java.util.List;
  */
 public interface Contratos {
     /**
+     * Contrato: C01 Registrar los datos de un paciente.
      *
      * @param ficha to save in the backend,
      * @return the {@link Ficha}.
@@ -42,6 +43,7 @@ public interface Contratos {
     Ficha registrarPaciente(Ficha ficha);
 
     /**
+     * Contrato: C02 Registrar los datos de un persona.
      *
      * @param persona to save in the backend.
      * @return the {@link Persona} saved.
@@ -49,7 +51,7 @@ public interface Contratos {
     Persona registrarPersona(Persona persona);
 
     /**
-     *
+     * Contrato: C03 Buscar ficha.
      * @param query to search.
      * @return the {@link List} of the {@link Ficha}
      */
