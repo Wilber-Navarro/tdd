@@ -24,6 +24,7 @@
 
 package cl.ucn.disc.pdbp.tdd;
 
+import cl.ucn.disc.pdbp.tdd.model.Control;
 import cl.ucn.disc.pdbp.tdd.model.Ficha;
 import cl.ucn.disc.pdbp.tdd.model.Persona;
 
@@ -34,6 +35,7 @@ import java.util.List;
  * @author Wilber Navarro.
  */
 public interface Contratos {
+
     /**
      * Contrato: C01 Registrar los datos de un paciente.
      *
@@ -64,6 +66,24 @@ public interface Contratos {
      */
     List<Ficha> getAllFichas();
 
+    /**
+     *
+     * @return the {@link List} of {@link Persona}.
+     */
+    List<Persona> getAllPersonas();
 
+    /**
+     *
+     * @param numeroFicha .
+     * @return the controls of Ficha.
+     */
+    List<Control> getControlesDeFicha(Integer numeroFicha);
+
+    /**
+     *
+     * @param numeroFicha numero de Ficha.
+     * @return The Persona of Ficha.
+     */
+    Persona getPersonaDeFicha(Integer numeroFicha);
 
 }

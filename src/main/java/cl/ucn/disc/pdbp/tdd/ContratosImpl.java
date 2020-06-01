@@ -110,7 +110,9 @@ public class ContratosImpl implements Contratos{
      */
     @Override
     public Ficha registrarPaciente(Ficha ficha) {
+
         throw new NotImplementedException("Not yet");
+
     }
 
     /**
@@ -121,7 +123,13 @@ public class ContratosImpl implements Contratos{
      */
     @Override
     public Persona registrarPersona(Persona persona) {
-        throw new NotImplementedException("Not yet");
+
+        // Nullity.
+        if (persona==null){
+            throw new IllegalArgumentException("Persona was null");
+        }
+        this.repoPersona.create(persona);
+        return persona;
     }
 
     /**
@@ -180,7 +188,46 @@ public class ContratosImpl implements Contratos{
      *
      * @return the {@link List} of {@link Ficha}.
      */
+    @Override
     public List<Ficha> getAllFichas(){
         return this.repoFicha.findAll();
+    }
+
+    /**
+     *
+     * @return the {@link List} of {@link Persona}.
+     */
+    @Override
+    public List<Persona> getAllPersonas(){
+        return this.repoPersona.findAll();
+    }
+
+    /**
+     *
+     * @param numeroFicha .
+     * @return the controls of Ficha.
+     */
+    @Override
+    public List<Control> getControlesDeFicha(Integer numeroFicha){
+
+        List<Ficha> fichas=this.repoFicha.findAll("numeroFicha",numeroFicha);
+        List<Control> controles = new ArrayList<>();
+        Ficha ficha=fichas.get(0);
+        controles.addAll(ficha.getControles());
+
+        return controles;
+
+    }
+
+    /**
+     *
+     * @param numeroFicha numero de Ficha.
+     * @return The Persona of Ficha.
+     */
+    public Persona getPersonaDeFicha(Integer numeroFicha){
+
+        List<Ficha> fichas=this.repoFicha.findAll("numeroFicha",numeroFicha);
+        return fichas.get(0).getDuenio();
+
     }
 }
