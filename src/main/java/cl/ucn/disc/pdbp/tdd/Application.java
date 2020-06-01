@@ -98,6 +98,54 @@ public final class Application {
                     ApiBuilder.path("find/:query",()->{
                         ApiBuilder.get(ApiRestEndpoints::findFichas);
                     });
+
+                    // Get -> /fichas/{numeroFicha}/controles.
+                    ApiBuilder.path(":numeroFicha",()->{
+
+                        ApiBuilder.path("controles",()->{
+
+                            ApiBuilder.get(ApiRestEndpoints::getControlesDeFicha);
+
+                        });
+
+                    });
+
+                    // Get -> /fichas/{numeroFicha}/persona.
+                    ApiBuilder.path(":numeroFicha",()->{
+
+                        ApiBuilder.path("persona",()->{
+
+                            ApiBuilder.get(ApiRestEndpoints::getPersonaDeFicha);
+
+                        });
+
+                    });
+
+                });
+                // /personas.
+                ApiBuilder.path("personas",()->{
+
+                    // /Get -> /personas.
+                    ApiBuilder.get(ApiRestEndpoints::getAllPersonas);
+
+                });
+                ApiBuilder.path("personas?=pageSize",()->{
+
+                    ApiBuilder.path(":size",()->{
+
+                        ApiBuilder.path("&page=",()->{
+
+                            ApiBuilder.path(":number",()->{
+
+                                // /Get ->/personas?=pageSize{size}&page={number}.
+                                //ApiBuilder.get(ApiRestEndpoints::getListadoPersonas);
+
+                            });
+
+                        });
+
+                    });
+
                 });
 
             });
@@ -117,7 +165,7 @@ public final class Application {
         });
 
         // Personas.
-        javalin.get("/personas",ctx -> {
+        javalin.get("/person",ctx -> {
 
             // Create simply list.
             List<Persona> personas = Arrays.asList(
@@ -129,13 +177,13 @@ public final class Application {
                             "Argentina 1234",
                             "correo@alumnos.ucn.cl"),
 
-                    new Persona ("Andrea",
-                            "Contreras",
-                            "152532873",
-                            "234 6768",
-                            "569 56435447",
-                            "Argentina 1234",
-                            "correo@alumnos.ucn.cl")
+                    new Persona ("Camila",
+                            "Reyes",
+                            "216087402",
+                            "234 6745",
+                            "569 56439945",
+                            "Angamos 1234",
+                            "correo_apellido@alumnos.ucn.cl")
             );
 
             // Send the List.

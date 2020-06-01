@@ -25,9 +25,15 @@
 package cl.ucn.disc.pdbp.tdd.model;
 
 import cl.ucn.disc.pdbp.tdd.dao.ZonedDateTimeType;
+import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.field.ForeignCollectionField;
 
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Ficha veterinaria.
@@ -94,6 +100,12 @@ public class Ficha {
      */
     @DatabaseField(foreign=true, canBeNull = false, foreignAutoRefresh = true)
     private Persona duenio;
+
+    /**
+     * The list of Control.
+     */
+    @ForeignCollectionField(eager = true)
+    private ForeignCollection<Control> controles;
 
 
     /**
@@ -212,5 +224,13 @@ public class Ficha {
      */
     public Persona getDuenio() {
         return duenio;
+    }
+
+    /**
+     *
+     * @return List of Controles.
+     */
+    public List<Control> getControles() {
+        return Collections.unmodifiableList(new ArrayList<>(controles));
     }
 }
