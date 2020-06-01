@@ -28,6 +28,7 @@ import cl.ucn.disc.pdbp.tdd.model.Persona;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import io.javalin.Javalin;
+import io.javalin.apibuilder.ApiBuilder;
 import io.javalin.core.util.RouteOverviewPlugin;
 import io.javalin.plugin.json.JavalinJson;
 import org.slf4j.Logger;
@@ -70,7 +71,7 @@ public final class Application {
         Javalin javalin = Javalin.create(config -> {
 
             //enable extensive development logging for http and websocket.
-            config.enableDevLogging();
+            //config.enableDevLogging();
 
             // Measure the time.
             config.requestLogger((((ctx, executionTimeMs) -> {
@@ -80,6 +81,28 @@ public final class Application {
 
             // Enable routes helper.
             config.registerPlugin(new RouteOverviewPlugin("/routes"));
+
+        //Define the routes.
+        }).routes(()->{
+
+            //The version.
+            ApiBuilder.path("v1", ()->{
+
+                // /fichas.
+                ApiBuilder.path("fichas",()->{
+
+                    // /Get -> /fichas.
+                    ApiBuilder.get(ApiRestEndpoints::getAllFichas);
+
+                    // Get -> /fichas/find/{query}.
+                    ApiBuilder.path("find/:query",()->{
+                        ApiBuilder.get(ApiRestEndpoints::findFichas);
+                    });
+                });
+
+            });
+
+        //Start the server at port 700.
         }).start(7000);
         Runtime.getRuntime().addShutdownHook(new Thread(()->{
             log.debug("Stopping the server ..");
@@ -92,8 +115,6 @@ public final class Application {
             //Show the date.
             ctx.result("The date: "+ ZonedDateTime.now());
         });
-
-
 
         // Personas.
         javalin.get("/personas",ctx -> {
@@ -121,6 +142,7 @@ public final class Application {
             ctx.json(personas);
 
         });
+
 
 
     }
