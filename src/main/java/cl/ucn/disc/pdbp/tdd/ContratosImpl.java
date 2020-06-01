@@ -175,4 +175,12 @@ public class ContratosImpl implements Contratos{
         }
         return fichas;
     }
+
+    /**
+     *
+     * @return the {@link List} of {@link Ficha}.
+     */
+    public List<Ficha> getAllFichas(){
+        return this.repoFicha.findAll();
+    }
 }

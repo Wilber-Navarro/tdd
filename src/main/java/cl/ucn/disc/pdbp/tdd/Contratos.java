@@ -52,9 +52,16 @@ public interface Contratos {
 
     /**
      * Contrato: C03 Buscar ficha.
+     *
      * @param query to search.
-     * @return the {@link List} of the {@link Ficha}
+     * @return the {@link List} of the {@link Ficha}.
      */
     List<Ficha> buscarFicha(String query);
+
+    /**
+     *
+     * @return the {@link List} of {@link Ficha}.
+     */
+    List<Ficha> getAllFichas();
 
 }
