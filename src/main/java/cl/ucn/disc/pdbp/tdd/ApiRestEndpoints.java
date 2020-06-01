@@ -24,11 +24,14 @@
 
 package cl.ucn.disc.pdbp.tdd;
 
+import cl.ucn.disc.pdbp.tdd.model.Control;
 import cl.ucn.disc.pdbp.tdd.model.Ficha;
+import cl.ucn.disc.pdbp.tdd.model.Persona;
 import io.javalin.http.Context;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Arrays;
 import java.util.List;
 
 public final class ApiRestEndpoints {
@@ -50,6 +53,10 @@ public final class ApiRestEndpoints {
         //Nothing here.
     }
 
+    /**
+     *
+     * @param ctx the Javalin {@link Context}.
+     */
     public static void getAllFichas(Context ctx){
         log.debug("Getting all the fichas ..");
         List<Ficha> fichas = CONTRATOS.getAllFichas();
@@ -67,5 +74,40 @@ public final class ApiRestEndpoints {
 
         List<Ficha> fichas=CONTRATOS.buscarFicha(query);
         ctx.json(fichas);
+    }
+
+    /**
+     *
+     * @param ctx the Javalin {@link Context}.
+     */
+    public static void getAllPersonas(Context ctx){
+        log.debug("Getting all the Personas ..");
+        List<Persona> personas = CONTRATOS.getAllPersonas();
+
+        ctx.json(personas);
+    }
+
+    /**
+     *
+     * @param ctx the Javalin {@link Context}.
+     */
+    public static void getControlesDeFicha(Context ctx){
+        Integer numero=Integer.parseInt(ctx.pathParam("numeroFicha"));
+        log.debug("Getting all controls of Ficha ..");
+        List<Control>  controles=CONTRATOS.getControlesDeFicha(numero);
+
+        ctx.json(controles);
+    }
+
+    /**
+     *
+     * @param ctx the Javalin {@link Context}.
+     */
+    public static void getPersonaDeFicha(Context ctx){
+        Integer numero=Integer.parseInt(ctx.pathParam("numeroFicha"));
+        log.debug("Getting the Persona of Ficha ..");
+        Persona persona=CONTRATOS.getPersonaDeFicha(numero);
+
+        ctx.json(persona);
     }
 }
