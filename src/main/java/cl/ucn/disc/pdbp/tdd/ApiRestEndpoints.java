@@ -25,45 +25,47 @@
 package cl.ucn.disc.pdbp.tdd;
 
 import cl.ucn.disc.pdbp.tdd.model.Ficha;
-import cl.ucn.disc.pdbp.tdd.model.Persona;
+import io.javalin.http.Context;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-/**
- * Contratos del sistema.
- * @author Wilber Navarro.
- */
-public interface Contratos {
-    /**
-     * Contrato: C01 Registrar los datos de un paciente.
-     *
-     * @param ficha to save in the backend,
-     * @return the {@link Ficha}.
-     */
-    Ficha registrarPaciente(Ficha ficha);
+public final class ApiRestEndpoints {
 
     /**
-     * Contrato: C02 Registrar los datos de un persona.
-     *
-     * @param persona to save in the backend.
-     * @return the {@link Persona} saved.
+     * The logger.
      */
-    Persona registrarPersona(Persona persona);
+    private static final Logger log = LoggerFactory.getLogger(ApiRestEndpoints.class);
 
     /**
-     * Contrato: C03 Buscar ficha.
-     *
-     * @param query to search.
-     * @return the {@link List} of the {@link Ficha}.
+     * The contratos (using SQLite).
      */
-    List<Ficha> buscarFicha(String query);
+    private static final Contratos CONTRATOS = new ContratosImpl("jdbc:sqlite:fivet.db");
+
+    /**
+     * Private constructor.
+     */
+    private ApiRestEndpoints(){
+        //Nothing here.
+    }
+
+    public static void getAllFichas(Context ctx){
+        log.debug("Getting all the fichas ..");
+        List<Ficha> fichas = CONTRATOS.getAllFichas();
+        ctx.json(fichas);
+    }
 
     /**
      *
-     * @return the {@link List} of {@link Ficha}.
+     * @param ctx the Javalin {@link Context}.
      */
-    List<Ficha> getAllFichas();
+    public static void findFichas(Context ctx){
 
+        String query=ctx.pathParam("query");
+        log.debug("Finding Fichas with query <{}> ..",query);
 
-
+        List<Ficha> fichas=CONTRATOS.buscarFicha(query);
+        ctx.json(fichas);
+    }
 }

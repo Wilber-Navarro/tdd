@@ -147,7 +147,7 @@ public class ContratosImpl implements Contratos{
 
                 // All the fichas with number.
                 log.debug("Finding fichas with numero ..");
-                fichas.addAll(this.repoFicha.findAll("Numero", query));
+                fichas.addAll(this.repoFicha.findAll("numeroFicha", query));
 
                 // 2. Find by rut of Duenio.
                 log.debug("Finding fichas with rut duenio ..");

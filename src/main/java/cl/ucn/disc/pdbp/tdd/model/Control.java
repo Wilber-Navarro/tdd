@@ -23,48 +23,70 @@
  */
 
 package cl.ucn.disc.pdbp.tdd.model;
+import cl.ucn.disc.pdbp.tdd.dao.ZonedDateTimeType;
+import com.j256.ormlite.field.DatabaseField;
+
 import java.time.ZonedDateTime;
 
 /**
  * Control Class
  * @autor Wilber Navarro.
  */
-public class Control {
+public final class Control {
+
+    /**
+     * The id.
+     */
+    @DatabaseField(generatedId = true)
+    private Long id;
 
     /**
      * Date of control.
      */
-    private final ZonedDateTime fechaControl;
+    @DatabaseField(persisterClass = ZonedDateTimeType.class)
+    private ZonedDateTime fechaControl;
 
     /**
      * Date of next control.
      */
-    private final ZonedDateTime fechaProxControl;
+    @DatabaseField(persisterClass = ZonedDateTimeType.class)
+    private ZonedDateTime fechaProxControl;
 
     /**
      * Temperatura.
      */
-    private final Float temperatura;
+    @DatabaseField
+    private Float temperatura;
 
     /**
      * Peso.
      */
-    private final Float peso;
+    @DatabaseField
+    private Float peso;
 
     /**
      * Altura.
      */
-    private final Float altura;
+    @DatabaseField
+    private Float altura;
 
     /**
      * Diagnostico.
      */
-    private final String diagnostico;
+    @DatabaseField
+    private String diagnostico;
 
     /**
      * Veterinario.
      */
+    @DatabaseField(foreign = true,canBeNull = false,foreignAutoRefresh = true)
     private Persona veterinatio;
+
+    /**
+     * The Ficha control
+     */
+    @DatabaseField(foreign = true,foreignAutoRefresh = true)
+    private Ficha ficha;
 
     /**
      * Constructor.
@@ -76,7 +98,7 @@ public class Control {
      * @param diagnostico textual del control.
      * @param veterinatio nombre del veterinario.
      */
-    public Control(ZonedDateTime fechaControl, ZonedDateTime fechaProxControl, Float temperatura, Float peso, Float altura, String diagnostico, Persona veterinatio) {
+    public Control(ZonedDateTime fechaControl, ZonedDateTime fechaProxControl, Float temperatura, Float peso, Float altura, String diagnostico, Persona veterinatio, Ficha ficha) {
         this.fechaControl = fechaControl;
         this.fechaProxControl = fechaProxControl;
         this.temperatura = temperatura;
@@ -84,6 +106,14 @@ public class Control {
         this.altura = altura;
         this.diagnostico = diagnostico;
         this.veterinatio = veterinatio;
+        this.ficha=ficha;
+    }
+
+    /**
+     * Empty constructor.
+     */
+    Control(){
+
     }
 
     /**
@@ -140,4 +170,19 @@ public class Control {
         return veterinatio;
     }
 
+    /**
+     *
+     * @return the id.
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     *
+     * @return the ficha.
+     */
+    public Ficha getFicha() {
+        return ficha;
+    }
 }
